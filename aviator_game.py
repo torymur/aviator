@@ -392,7 +392,7 @@ class Board(QFrame):
 
     def conflictResolution(self, shape, x, y):
         """ Rewards the user accordingly with the type of piece. """
-        if shape in [Shape.DoubleShape, Shape.TripleShape]:
+        if shape in Shape.goodPieces():
             self.score += 10
             self.setShapeAt(x, y, Shape.NoShape)
 
@@ -476,7 +476,7 @@ class Shape(object):
 
     def size(self):
         """ Returns length of current shape coordinates. """
-        return len(Shape.CoordsTable[self._shape])
+        return len(self.coords)
 
 
     def maxSizes(self):
@@ -508,47 +508,31 @@ class Shape(object):
 
 
     def x(self, index):
-        return self.coords[index][0]
+        return self.coords[index][X]
 
 
     def y(self, index):
-        return self.coords[index][1]
+        return self.coords[index][Y]
 
 
     def minX(self):
         """ Returns the lowest X-point of the current shape. """
-        m = self.coords[0][0]
-        for i in range(len(self.coords)):
-            m = min(m, self.coords[i][0])
-
-        return m
+        return min([point[X] for point in self.coords])
 
 
     def maxX(self):
         """ Returns the highest X-point of the current shape. """
-        m = self.coords[0][0]
-        for i in range(len(self.coords)):
-            m = max(m, self.coords[i][0])
-
-        return m
+        return max([point[X] for point in self.coords])
 
 
     def minY(self):
         """ Returns the lowest Y-point of the current shape. """
-        m = self.coords[0][1]
-        for i in range(len(self.coords)):
-            m = min(m, self.coords[i][1])
-
-        return m
+        return min([point[Y] for point in self.coords])
 
 
     def maxY(self):
         """ Returns the highest Y-point of the current shape. """
-        m = self.coords[0][1]
-        for i in range(len(self.coords)):
-            m = max(m, self.coords[i][1])
-
-        return m
+        return max([point[X] for point in self.coords])
 
 
 
