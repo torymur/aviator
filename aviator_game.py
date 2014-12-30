@@ -174,7 +174,7 @@ class Board(QFrame):
 
 
     def drawSquare(self, painter, x, y, shape):
-        """  """
+        """ Draws a unit of 'square' (different pieces consist from squares). """
         color = QColor(Shape.ColorTable[shape])
         painter.fillRect(x + 1, y + 1, self.squareWidth() - 2,
                         self.squareHeight() - 2, color)
@@ -392,11 +392,7 @@ class Board(QFrame):
 
     def conflictResolution(self, shape, x, y):
         """ Rewards the user accordingly with the type of piece. """
-        if shape == Shape.DoubleShape:
-            self.score += 10
-            self.setShapeAt(x, y, Shape.NoShape)
-
-        elif shape == Shape.TripleShape:
+        if shape in [Shape.DoubleShape, Shape.TripleShape]:
             self.score += 10
             self.setShapeAt(x, y, Shape.NoShape)
 
